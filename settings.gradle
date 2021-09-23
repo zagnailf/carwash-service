@@ -1,2 +1,3 @@
-rootProject.name = 'carwash'
+rootProject.name = 'carwash-service'
+include 'carwash'
 
