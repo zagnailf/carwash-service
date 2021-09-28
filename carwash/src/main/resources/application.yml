@@ -9,5 +9,15 @@ spring:
         enabled: true
 
 springdoc:
+  info:
+    title: API для клиентов системы управления автомойками
+    description: API description
+    version: 1.0
+
+    contact:
+      email: support@carwashservice.online
+      url: https://carwashservice.online
+      name: Zagidulin Nail
+
   swagger-ui:
     path: /swagger-ui.html
