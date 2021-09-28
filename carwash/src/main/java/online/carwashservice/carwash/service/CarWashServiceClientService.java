@@ -1,10 +1,11 @@
 package online.carwashservice.carwash.service;
 
 import online.carwashservice.carwash.dto.request.CreateCarWashServiceClientRq;
-import online.carwashservice.carwash.dto.result.CreateCarWashServiceClientResult;
 import online.carwashservice.carwash.persistence.ServiceClientDocument;
 import online.carwashservice.carwash.persistence.ServiceClientRepository;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 @Service
 public class CarWashServiceClientService {
@@ -17,14 +18,23 @@ public class CarWashServiceClientService {
 
     /**
      * Создание клиента сервиса. Доступ должен быть только у администратора/модератора сервиса
+     * @return модель клиента
      */
-    public CreateCarWashServiceClientResult create(CreateCarWashServiceClientRq request) {
-        ServiceClientDocument result = serviceClientRepository.save(ServiceClientDocument.builder()
+    public Mono<ServiceClientDocument> create(CreateCarWashServiceClientRq request) {
+        ServiceClientDocument serviceClientDocument = ServiceClientDocument.builder()
                 .name(request.getName())
                 .description(request.getDescription())
                 .telegramBotEnabled(request.getTelegramBotEnabled())
-                .build());
+                .enabled(false)
+                .build();
+        return serviceClientRepository.save(serviceClientDocument);
+    }
 
-        return CreateCarWashServiceClientResult.builder().result(result).build();
+    public Flux<ServiceClientDocument> getAllClientServices() {
+        return serviceClientRepository.findAll();
+    }
+
+    public Flux<ServiceClientDocument> getAllEnabledClientServices() {
+        return serviceClientRepository.findByEnabled(true);
     }
 }

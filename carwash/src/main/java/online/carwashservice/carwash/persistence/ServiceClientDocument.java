@@ -17,8 +17,8 @@ public class ServiceClientDocument {
     private String name;
     private String description;
     @Field(value = "telegram_bot_enabled")
-    private Boolean telegramBotEnabled;
-    private Boolean enabled;
+    private boolean telegramBotEnabled;
+    private boolean enabled;
     private List<AddressDocument> addresses;
     private List<PositionDocument> positions;
     @Field(value = "car_types")
