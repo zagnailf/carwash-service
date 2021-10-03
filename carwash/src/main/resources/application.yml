@@ -2,11 +2,21 @@ server:
   port: 8085
 
 spring:
+  application:
+    name: carwash-service
   data:
     mongodb:
       uri: mongodb://localhost:27017/carwashes
       repositories:
         enabled: true
+
+logging:
+  level:
+    org:
+      springframework:
+        web: DEBUG
+      hibernate:
+        SQL: INFO
 
 springdoc:
   info:
