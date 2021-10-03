@@ -4,12 +4,14 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.ToString;
 
 @Data
 @Builder
+@ToString
 @AllArgsConstructor
 @Schema(description = "Сущность клиента сервиса")
-public class CreateCarWashServiceClientRq {
+public class CarWashServiceClientRq {
     @Schema(description = "Название автомойки")
     private String name;
 
