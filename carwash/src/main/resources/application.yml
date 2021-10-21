@@ -1,7 +1,5 @@
-server:
-  port: 8085
-
 spring:
+  profiles: dev
   application:
     name: carwash-service
   data:
@@ -9,6 +7,9 @@ spring:
       uri: mongodb://localhost:27017/carwashes
       repositories:
         enabled: true
+
+server:
+  port: 8085
 
 logging:
   level:
@@ -31,3 +32,17 @@ springdoc:
 
   swagger-ui:
     path: /swagger-ui.html
+
+---
+spring:
+  profiles: test
+  application:
+    name: carwash-service
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/carwashes_test
+      repositories:
+        enabled: true
+
+server:
+  port: 8085
