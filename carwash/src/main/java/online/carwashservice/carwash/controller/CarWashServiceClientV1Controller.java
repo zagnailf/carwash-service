@@ -35,14 +35,18 @@ public class CarWashServiceClientV1Controller {
 
     @Operation(summary = "Создание клиента сервиса управления автомойками")
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping(value = "/", produces = MediaType.APPLICATION_NDJSON_VALUE, consumes = MediaType.APPLICATION_NDJSON_VALUE)
+    @PostMapping(
+            value = "/",
+            //headers = {"Accept=application/vnd.company.app-1.0+json"},
+            produces = MediaType.APPLICATION_NDJSON_VALUE,
+            consumes = MediaType.APPLICATION_NDJSON_VALUE)
     public Mono<ServiceClientDocument> create(@RequestBody CarWashServiceClientRq request) {
         log.info("Create client with name: '{}'", request.getName());
         return carWashServiceClientService.create(request);
     }
 
     @Operation(summary = "Получить всех клиентов сервиса")
-    @GetMapping(value = "/", produces = MediaType.APPLICATION_NDJSON_VALUE)
+    @GetMapping(value = "/", produces = {MediaType.APPLICATION_NDJSON_VALUE})
     public Flux<ServiceClientDocument> getAllClientServices() {
         Flux<ServiceClientDocument> allClientServices = carWashServiceClientService.getAllClientServices();
         allClientServices.count().subscribe(count -> log.info("Get all clients count: '{}'", count));
