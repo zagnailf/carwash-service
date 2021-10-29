@@ -1,12 +1,14 @@
 spring:
-  profiles: dev
+  config:
+    activate:
+      on-profile: dev
   application:
     name: carwash-service
   data:
     mongodb:
       uri: mongodb://localhost:27017/carwashes
       repositories:
-        enabled: true
+        type: reactive
 
 server:
   port: 8085
@@ -35,14 +37,56 @@ springdoc:
 
 ---
 spring:
-  profiles: test
+  config:
+    activate:
+      on-profile: container
+  application:
+    name: carwash-service
+  data:
+    mongodb:
+      uri: mongodb://mongo:27017/carwash-service
+      repositories:
+        type: reactive
+  zipkin:
+    base-url: http://zipkin:9411
+
+server:
+  port: 8080
+
+logging:
+  level:
+    org:
+      springframework:
+        web: DEBUG
+      hibernate:
+        SQL: INFO
+
+springdoc:
+  info:
+    title: API для клиентов системы управления автомойками
+    description: API description
+    version: 1.0
+
+    contact:
+      email: support@carwashservice.online
+      url: https://carwashservice.online
+      name: Zagidulin Nail
+
+  swagger-ui:
+    path: /swagger-ui.html
+
+---
+spring:
+  config:
+    activate:
+      on-profile: test
   application:
     name: carwash-service
   data:
     mongodb:
       uri: mongodb://localhost:27017/carwashes_test
       repositories:
-        enabled: true
+        type: reactive
 
 server:
   port: 8085
