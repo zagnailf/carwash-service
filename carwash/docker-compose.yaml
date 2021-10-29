@@ -1,0 +1,30 @@
+version: '2'
+
+services:
+  app:
+    image: carwash-spring-boot-mongodb:latest
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: carwash-service
+    depends_on:
+      - mongo
+      - zipkin
+    ports:
+      - 8080:8080
+    links:
+      - mongo
+      - zipkin
+  mongo:
+    image: mongo:latest
+    container_name: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_DATABASE: carwash-service
+    ports:
+      - 27017:27017
+  zipkin:
+    image: "openzipkin/zipkin"
+    container_name: zipkin
+    ports:
+      - "9411:9411"
