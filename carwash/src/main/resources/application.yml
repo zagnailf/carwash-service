@@ -6,7 +6,7 @@ spring:
     name: carwash-service
   data:
     mongodb:
-      uri: mongodb://localhost:27017/carwashes
+      uri: mongodb://localhost:27017/carwashes-dev
       repositories:
         type: reactive
 
